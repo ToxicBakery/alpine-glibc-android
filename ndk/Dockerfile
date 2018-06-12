@@ -13,7 +13,7 @@ ENV PATH=${PATH}:${ANDROID_HOME}/tools/bin
 ENV PATH=${PATH}:${ANDROID_NDK}
 
 RUN apt-get update \
- && apt-get install wget gnupg openjdk-8-jdk unzip -y \
+ && apt-get install wget gnupg openjdk-8-jdk unzip git -y \
  && rm -rf /var/cache/apt/archives \
  && update-ca-certificates \
 # SDK
