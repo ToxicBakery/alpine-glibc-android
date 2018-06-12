@@ -3,11 +3,14 @@ FROM ubuntu:16.04 as sdk-ndk
 ARG ANDROID_TARGET_SDK=27
 ARG ANDROID_BUILD_TOOLS=27.0.3
 ARG ANDROID_SDK_TOOLS=4333796
+ARG ANDROID_NDK_TOOLS=r17
 
 ENV ANDROID_HOME=${PWD}/android-sdk-linux
+ENV ANDROID_NDK=${PWD}/android-ndk-${ANDROID_NDK_TOOLS}
 ENV PATH=${PATH}:${ANDROID_HOME}/platform-tools
 ENV PATH=${PATH}:${ANDROID_HOME}/tools
 ENV PATH=${PATH}:${ANDROID_HOME}/tools/bin
+ENV PATH=${PATH}:${ANDROID_NDK}
 
 RUN apt-get update \
  && apt-get install wget gnupg openjdk-8-jdk unzip -y \
@@ -22,7 +25,6 @@ RUN apt-get update \
 # NDK
  && wget -q -O android-ndk.zip https://dl.google.com/android/repository/android-ndk-${ANDROID_NDK_TOOLS}-linux-x86_64.zip \
  && unzip -qo android-ndk.zip \
- && mv android-ndk-${ANDROID_NDK_TOOLS} ${ANDROID_NDK} \
  && rm android-ndk.zip \
 # Config
  && mkdir -p ~/.gradle \
