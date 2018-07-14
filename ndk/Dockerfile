@@ -11,11 +11,18 @@ ENV PATH=${PATH}:${ANDROID_HOME}/platform-tools
 ENV PATH=${PATH}:${ANDROID_HOME}/tools
 ENV PATH=${PATH}:${ANDROID_HOME}/tools/bin
 ENV PATH=${PATH}:${ANDROID_NDK}
+ENV PATH ${PATH}:/root/gcloud/google-cloud-sdk/bin
 
 RUN apt-get update \
- && apt-get install wget gnupg openjdk-8-jdk unzip git curl -y \
+ && apt-get install wget gnupg openjdk-8-jdk unzip git curl python-pip --no-install-recommends -y \
  && rm -rf /var/cache/apt/archives \
  && update-ca-certificates \
+ && pip install -U setuptools \
+ && pip install -U wheel \
+ && pip install -U crcmod \
+# gcloud
+ && curl -sSL https://sdk.cloud.google.com > /tmp/gcl && bash /tmp/gcl --install-dir=/root/gcloud --disable-prompts \
+ && rm -rf /tmp/gcl \
 # SDK
  && wget -q -O android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip \
  && mkdir ${ANDROID_HOME} \
