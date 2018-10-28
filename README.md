@@ -7,3 +7,6 @@ Alpine Linux with necessary `ia32` libs for running android tools like `aapt`.
 
 [docker-library/openjdk](https://github.com/docker-library/openjdk)  
 Scripts for OpenJDK builds on Alpine
+
+[DockerHub](https://hub.docker.com/r/toxicbakery/alpine-glibc-android/)  
+DockerHub builds

@@ -14,7 +14,7 @@ ENV PATH=${PATH}:${ANDROID_NDK}
 ENV PATH ${PATH}:/root/gcloud/google-cloud-sdk/bin
 
 RUN apt-get update \
- && apt-get install wget gnupg openjdk-8-jdk unzip git curl python-pip --no-install-recommends -y \
+ && apt-get install wget gnupg openjdk-8-jdk unzip git curl python-pip bzip2 --no-install-recommends -y \
  && rm -rf /var/cache/apt/archives \
  && update-ca-certificates \
  && pip install -U setuptools \
