@@ -3,13 +3,15 @@ FROM ubuntu:16.04
 ARG ANDROID_TARGET_SDK=28
 ARG ANDROID_BUILD_TOOLS=28.0.2
 ARG ANDROID_SDK_TOOLS=4333796
+ARG SONAR_CLI=3.2.0.1227
 
 ENV ANDROID_HOME=${PWD}/android-sdk-linux
 ENV PATH=${PATH}:${ANDROID_HOME}/platform-tools
 ENV PATH=${PATH}:${ANDROID_HOME}/tools
 ENV PATH=${PATH}:${ANDROID_HOME}/tools/bin
 ENV PATH=${PATH}:${ANDROID_NDK}
-ENV PATH ${PATH}:/root/gcloud/google-cloud-sdk/bin
+ENV PATH=${PATH}:/root/gcloud/google-cloud-sdk/bin
+ENV PATH=${PATH}:/root/sonar/bin
 
 RUN apt-get update \
  && apt-get install wget gnupg openjdk-8-jdk unzip git curl python-pip bzip2 --no-install-recommends -y \
@@ -21,6 +23,10 @@ RUN apt-get update \
 # gcloud
  && curl -sSL https://sdk.cloud.google.com > /tmp/gcl && bash /tmp/gcl --install-dir=/root/gcloud --disable-prompts \
  && rm -rf /tmp/gcl \
+# Sonar
+ && wget -q -O sonar.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_CLI}-linux.zip \
+ && unzip -qo sonar.zip \
+ && mv sonar-scanner-${SONAR_CLI}-linux /root/sonar \
 # SDK
  && wget -q -O android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip \
  && mkdir ${ANDROID_HOME} \
