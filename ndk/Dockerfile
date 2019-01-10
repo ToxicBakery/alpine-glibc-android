@@ -1,4 +1,4 @@
-FROM ubuntu:16.04 as sdk-ndk
+FROM frolvlad/alpine-glibc:alpine-3.8_glibc-2.28
 
 ARG ANDROID_TARGET_SDK=28
 ARG ANDROID_BUILD_TOOLS=28.0.3
@@ -15,9 +15,8 @@ ENV PATH=${PATH}:${ANDROID_NDK}
 ENV PATH=${PATH}:/root/gcloud/google-cloud-sdk/bin
 ENV PATH=${PATH}:/root/sonar/bin
 
-RUN apt-get update \
- && apt-get install wget gnupg openjdk-8-jdk unzip git curl python-pip bzip2 --no-install-recommends -y \
- && rm -rf /var/cache/apt/archives \
+RUN apk --no-cache add bash wget gnupg openjdk8 unzip git curl python3 bzip2 \
+ && pip3 install --upgrade pip setuptools \
  && update-ca-certificates \
  && pip install -U setuptools \
  && pip install -U wheel \
