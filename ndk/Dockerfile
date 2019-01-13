@@ -16,7 +16,7 @@ ENV PATH=${PATH}:/root/gcloud/google-cloud-sdk/bin
 ENV PATH=${PATH}:/root/sonar/bin
 
 RUN apt-get update \
- && apt-get install wget gnupg openjdk-8-jdk unzip git curl python-pip bzip2 --no-install-recommends -y \
+ && apt-get install wget gnupg openjdk-8-jdk unzip git curl python-pip bzip2 make --no-install-recommends -y \
  && rm -rf /var/cache/apt/archives \
  && update-ca-certificates \
  && pip install -U setuptools \
