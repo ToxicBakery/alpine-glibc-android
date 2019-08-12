@@ -18,22 +18,22 @@ RUN apk --no-cache add bash wget gnupg openjdk11 unzip git curl python3 bzip2 \
  && update-ca-certificates \
  && pip install -U setuptools \
  && pip install -U wheel \
- && pip install -U crcmod \
+ && pip install -U crcmod
 # gcloud
- && curl -sSL https://sdk.cloud.google.com > /tmp/gcl && bash /tmp/gcl --install-dir=/root/gcloud --disable-prompts \
- && rm -rf /tmp/gcl \
+RUN curl -sSL https://sdk.cloud.google.com > /tmp/gcl && bash /tmp/gcl --install-dir=/root/gcloud --disable-prompts \
+ && rm -rf /tmp/gcl
 # Sonar
- && wget -q -O sonar.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_CLI}-linux.zip \
+RUN wget -q -O sonar.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_CLI}-linux.zip \
  && unzip -qo sonar.zip \
- && mv sonar-scanner-${SONAR_CLI}-linux /root/sonar \
+ && mv sonar-scanner-${SONAR_CLI}-linux /root/sonar
 # SDK
- && wget -q -O android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip \
+RUN wget -q -O android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip \
  && mkdir ${ANDROID_HOME} \
  && unzip -qo android-sdk.zip -d ${ANDROID_HOME} \
  && chmod +x ${ANDROID_HOME}/tools/android \
- && rm android-sdk.zip \
+ && rm android-sdk.zip
 # Config
- && mkdir -p ~/.gradle \
+RUN mkdir -p ~/.gradle \
  && echo "org.gradle.daemon=false" >> ~/.gradle/gradle.properties \
  && mkdir ~/.android \
  && touch ~/.android/repositories.cfg \
