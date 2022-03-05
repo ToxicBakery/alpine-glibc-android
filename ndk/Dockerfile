@@ -1,7 +1,7 @@
-FROM frolvlad/alpine-glibc:alpine-3.8_glibc-2.28
+FROM frolvlad/alpine-glibc:alpine-3.15_glibc-2.34
 
-ARG ANDROID_TARGET_SDK=28
-ARG ANDROID_BUILD_TOOLS=28.0.3
+ARG ANDROID_TARGET_SDK=31
+ARG ANDROID_BUILD_TOOLS=29.0.3
 ARG ANDROID_SDK_TOOLS=4333796
 ARG ANDROID_NDK_TOOLS=r18b
 ARG SONAR_CLI=3.3.0.1492
@@ -15,7 +15,7 @@ ENV PATH=${PATH}:${ANDROID_NDK}
 ENV PATH=${PATH}:/root/gcloud/google-cloud-sdk/bin
 ENV PATH=${PATH}:/root/sonar/bin
 
-RUN apk --no-cache add bash wget gnupg openjdk8 unzip git curl python3 bzip2 make \
+RUN apk --no-cache add bash wget gnupg openjdk8 unzip git curl python3 bzip2 make openssh-client py3-pip \
  && pip3 install --upgrade pip setuptools \
  && update-ca-certificates \
  && pip install -U setuptools \
