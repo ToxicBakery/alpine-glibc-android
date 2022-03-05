@@ -15,7 +15,7 @@ ENV PATH=${PATH}:${ANDROID_NDK}
 ENV PATH=${PATH}:/root/gcloud/google-cloud-sdk/bin
 ENV PATH=${PATH}:/root/sonar/bin
 
-RUN apk --no-cache add bash wget gnupg openjdk8 unzip git curl python3 bzip2 make openssh-client py3-pip \
+RUN apk --no-cache add bash wget gnupg openjdk11 unzip git curl python3 bzip2 make openssh-client py3-pip \
  && pip3 install --upgrade pip setuptools \
  && update-ca-certificates \
  && pip install -U setuptools \
